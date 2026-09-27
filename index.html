@@ -17,6 +17,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    /* Apply the saved text size before first paint */
+    try { var fs = localStorage.getItem('fontScale'); if (fs) document.documentElement.style.setProperty('--fs', fs); } catch (e) {}
+  </script>
 </head>
 <body>
 <div class="wrapper">
@@ -34,6 +38,12 @@
       <a href="https://github.com/dyomini" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github"></i></a>
       <!-- <a href="https://scholar.google.com/citations?user=YOUR_ID" aria-label="Google Scholar" title="Google Scholar"><i class="ai ai-google-scholar"></i></a> -->
       <!-- <a href="https://www.linkedin.com/in/YOUR_ID" aria-label="LinkedIn" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a> -->
+    </div>
+
+    <div class="text-size" role="group" aria-label="Text size">
+      <button type="button" data-scale="1" aria-label="Default text size" title="Default text size" style="font-size:14px">A</button>
+      <button type="button" data-scale="1.15" aria-label="Larger text" title="Larger text" style="font-size:18px">A</button>
+      <button type="button" data-scale="1.3" aria-label="Largest text" title="Largest text" style="font-size:22px">A</button>
     </div>
   </header>
 
@@ -134,5 +144,24 @@
   </section>
 
 </div>
+<script>
+  (function () {
+    var root = document.documentElement;
+    var buttons = document.querySelectorAll('.text-size button');
+    function apply(scale) {
+      root.style.setProperty('--fs', scale);
+      buttons.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.scale === scale ? 'true' : 'false'); });
+    }
+    var saved = '1';
+    try { saved = localStorage.getItem('fontScale') || '1'; } catch (e) {}
+    apply(saved);
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () {
+        apply(b.dataset.scale);
+        try { localStorage.setItem('fontScale', b.dataset.scale); } catch (e) {}
+      });
+    });
+  })();
+</script>
 </body>
 </html>
