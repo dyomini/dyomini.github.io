@@ -22,6 +22,11 @@ files/                     CV and paper PDFs
 - **News / publications**: copy an existing `<li>` in `index.html` and edit it.
 - **Google Scholar / LinkedIn**: uncomment the matching line under `social-icons`.
 
+## Cache busting
+
+After editing `assets/css/style.css`, bump the `?v=` date on its `<link>` in `index.html`
+so visitors' browsers load the new file instead of a cached copy.
+
 ## Preview locally
 
 ```bash
